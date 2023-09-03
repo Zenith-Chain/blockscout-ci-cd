@@ -4,7 +4,7 @@ global:
 # enable Blockscout deploy
 blockscout:
   app: blockscout
-  enabled: false
+  enabled: true
   image:
     _default: blockscout/blockscout:latest
 
@@ -85,7 +85,7 @@ blockscout:
 
   # enable service to connect to RDS
   rds:
-    enabled: false
+    enabled: true
     endpoint:
       _default: <endpoint>.<region>.rds.amazonaws.com
 
@@ -104,7 +104,7 @@ blockscout:
     #   _default: test
 
 postgres:
-  enabled: false
+  enabled: true
   image: postgres:13.8
   port: 5432
 
@@ -112,14 +112,14 @@ postgres:
   args:
 
   customShm:
-    enabled: false
+    enabled: true
 
   strategy: RollingUpdate
 
   service:
     type: ClusterIP
 
-  persistence: false
+  persistence: true
   storageClass: gp3-new
   storage: 100Gi
   mountPath: /var/lib/postgresql/data
@@ -128,7 +128,7 @@ postgres:
     # mainnet: 'pvc-mainnet'
 
   files:
-    enabled: false
+    enabled: true
     mountPath: /docker-entrypoint-initdb.d
     list: {}
       # init.sql: |
@@ -154,14 +154,14 @@ postgres:
 
   # probes
   livenessProbe:
-    enabled: false
+    enabled: true
     path: /
     params:
       initialDelaySeconds: 100
       periodSeconds: 100
       timeoutSeconds: 30
   readinessProbe:
-    enabled: false
+    enabled: true
     path: /
     params:
       initialDelaySeconds: 60
@@ -216,7 +216,7 @@ geth:
     mountPath: /tmp/path
 
   persistence:
-    enabled: false
+    enabled: true
     mountPath: path
     storageClass: gp3-new
     storage:
@@ -257,7 +257,7 @@ geth:
 
   # init container
   init:
-    enabled: false
+    enabled: true
     image:
       _default: blockscout/blockscout:latest
     command:
@@ -1128,7 +1128,7 @@ visualizer:
 frontend:
   # set this value same as in blockscout to use one URL for blockscout and frontend
   app: frontend
-  enabled: false
+  enabled: yes
 
   image:
     _default: ghcr.io/blockscout/frontend:main

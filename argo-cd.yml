@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staked-coins
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:Zenith-Chain/blockscout-ci-cd.git
+    targetRevision: HEAD  # or specify a tag, commit hash, or branch name
+    path: charts/blockscout-stack  # Directory where your Helm chart is located within your repo
+    helm:
+      valueFiles:
+        - values.yaml  # This assumes your values file is named 'values.yaml'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: scan  # Make sure this namespace exists
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
