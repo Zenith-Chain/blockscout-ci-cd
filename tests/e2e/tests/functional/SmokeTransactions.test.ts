@@ -4,6 +4,7 @@ test.describe.configure({ mode: `parallel` })
 /*
     See Smoke.test.ts for explanations
 */
+// test.skip()
 
 test(`@SmokeEthMainnet Eth transactions page check`, async ({ newHomePage }) => {
     await newHomePage.open_custom(`https://eth.blockscout.com/txs`)
@@ -101,16 +102,26 @@ test(`@SmokeEthIotaShimmer Iota Shimmer transactions page check`, async ({ newHo
 })
 
 test(`@SmokeEthImmutable Immutable transactions page check`, async ({ newHomePage }) => {
-    await newHomePage.open_custom(`https://immutable-testnet.blockscout.com/txs`)
+    await newHomePage.open_custom(`https://explorer.testnet.immutable.com/txs`)
     await newHomePage.actions.verifyElementIsDisplayed(`text=/0x/`)
 })
 
 test(`@SmokeEthShibarium Shibarium transactions page check`, async ({ newHomePage }) => {
-    await newHomePage.open_custom(`https://shibarium-testnet.blockscout.com/txs`)
+    await newHomePage.open_custom(`https://puppyscan.shib.io/txs`)
     await newHomePage.actions.verifyElementIsDisplayed(`text=/0x/`)
 })
 
-test(`@SmokeEthFuse Shibarium transactions page check`, async ({ newHomePage }) => {
+test(`@SmokeEthFuse Fuse transactions page check`, async ({ newHomePage }) => {
     await newHomePage.open_custom(`https://fuse.blockscout.com/txs`)
+    await newHomePage.actions.verifyElementIsDisplayed(`text=/0x/`)
+})
+
+test(`@SmokeEthFuseTestnet Fuse testnet transactions page check`, async ({ context, newHomePage }) => {
+    await newHomePage.open_custom(`https://fuse-testnet.blockscout.com/txs`)
+    await newHomePage.actions.verifyElementIsDisplayed(`text=/0x/`)
+})
+
+test(`@SmokeEthShibariumTestnet Shibarium testnet transactions page check`, async ({ context, newHomePage }) => {
+    await newHomePage.open_custom(`https://puppyscan.shib.io/txs`)
     await newHomePage.actions.verifyElementIsDisplayed(`text=/0x/`)
 })
